@@ -16,8 +16,9 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
     if (event is ListenConnection) {
       _subscription = DataConnectionChecker().onStatusChange.listen((status) {
         add(ConnectionChanged(status == DataConnectionStatus.disconnected
-            ? ConnectionFailure()
-            : ConnectionSuccess()));
+            ? ConnectionFailure() : ConnectionSuccess()
+        )
+        );
       });
     }
     if (event is ConnectionChanged) yield event.connection;
